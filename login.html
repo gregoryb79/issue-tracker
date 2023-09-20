@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Tracker - Login</title>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/defaults.css" />
+    <link rel="stylesheet" href="dist/utilities.css" />
+    <link rel="stylesheet" href="dist/composition.css" />
+    <link rel="stylesheet" href="dist/blocks.css" />
+</head>
+
+<body>
+    <main class="flow">
+        <h1>Issues Tracker</h1>
+        <form name="login" class="flow center medium" novalidate>
+            <h2>Login</h2>
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autofocus />
+                <p class="error-message"></p>
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required />
+                <p class="error-message"></p>
+            </div>
+            <div class="cluster cluster--end"><button>Login</button></div>
+            <p class="danger align-center form-error"></p>
+        </form>
+    </main>
+
+    <script src="dist/session.js"></script>
+    <script src="dist/forms.js"></script>
+    <script src="dist/login.js"></script>
+</body>
+
+</html>

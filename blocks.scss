@@ -1,0 +1,56 @@
+.app-menu {
+    background: #eee;
+    padding: var(--gutter);
+
+    @media (prefers-color-scheme: dark) {
+        background: #333;
+    }
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 0.7rem;
+        line-height: 1.2;
+        font-weight: 600;
+    }
+
+    input,
+    textarea,
+    select {
+        padding: 0.3em 0.4em;
+        border-radius: 0.25em;
+        border: 1px solid currentColor;
+        outline-color: var(--color-primary);
+        background: #f5f5f5;
+        resize: none;
+
+        @media (prefers-color-scheme: dark) {
+            background: #222;
+        }
+
+        .was-validated &:invalid {
+            border-color: var(--color-danger);
+        }
+    }
+
+    .error-message {
+        --line-height: 1.2;
+        height: calc(var(--line-height) * 1em);
+        line-height: var(--line-height);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--color-danger);
+        visibility: hidden;
+
+        .was-validated & {
+            visibility: visible;
+        }
+    }
+}
+
+.form-error {
+    --flow-spacing: 0.5em;
+}

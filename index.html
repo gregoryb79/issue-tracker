@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Tracker</title>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/defaults.css" />
+    <link rel="stylesheet" href="dist/utilities.css" />
+    <link rel="stylesheet" href="dist/composition.css" />
+    <link rel="stylesheet" href="dist/blocks.css" />
+    <link rel="stylesheet" href="dist/index.css" />
+</head>
+
+<body class="sidebar">
+    <menu class="app-menu stack">
+        <div class="cluster">
+            <p class="username"></p>
+            <button class="btn--link" id="logoutButton">Logout</button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="create-issue.html">Create issue</a></li>
+                <li><a href="index.html#details">Details view</a></li>
+                <li><a href="index.html#sprint">Sprint board</a></li>
+                <li><a href="create-user.html">Create user</a></li>
+            </ul>
+        </nav>
+    </menu>
+    <main class="stack">
+        <h1>Issues Tracker</h1>
+        <div class="details-view stack">
+            <h2>Details view</h2>
+            <div class="sidebar">
+                <ul id="issue-list" class="stack"></ul>
+                <form name="editIssue" class="flow" novalidate>
+                    <h3></h3>
+                    <div class="form-control">
+                        <label for="status">Status</label>
+                        <select name="status" id="status">
+                            <option value="New">New</option>
+                            <option value="In Progress">In progress</option>
+                            <option value="Done">Done</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label for="assignee">Assignee</label>
+                        <select name="assignee" id="assignee"></select>
+                    </div>
+                    <div class="form-control">
+                        <label for="storyPoints">Story points</label>
+                        <input type="text" inputmode="numeric" id="storyPoints" name="storyPoints"
+                            pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
+                        <p class="error-message"></p>
+                    </div>
+                    <div class="form-control">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="10"></textarea>
+                    </div>
+                    <div class="cluster cluster--end"><button>Save</button></div>
+                </form>
+                <p class="align-center">Issue not found.</p>
+            </div>
+        </div>
+        <div class="sprint-board stack">
+            <h2>Sprint board</h2>
+            <div class="columns">
+                <div class="column stack">
+                    <h3>New</h3>
+                    <ul id="new-column" class="stack" data-status="New"></ul>
+                </div>
+                <div class="column stack">
+                    <h3>In Progress</h3>
+                    <ul id="in-progress-column" class="stack" data-status="In Progress"></ul>
+                </div>
+                <div class="column stack">
+                    <h3>Done</h3>
+                    <ul id="done-column" class="stack" data-status="Done"></ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="dist/session.js"></script>
+    <script src="dist/forms.js"></script>
+    <script src="dist/issues.js"></script>
+    <script src="dist/index.js"></script>
+</body>
+
+</html>

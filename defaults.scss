@@ -1,0 +1,100 @@
+:root {
+    --body-font-color: #444;
+    --accent-font-color: black;
+
+    --color-primary: hsl(211deg 90% 50%);
+
+    --color-danger: hsl(0deg 70% 50%);
+
+    --gutter: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --body-font-color: #ddd;
+        --accent-font-color: white;
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    font-size: calc(1rem + 0.5vw);
+    line-height: 1.6;
+    color-scheme: light dark;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--body-font-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2;
+    letter-spacing: -0.1rem;
+    color: var(--accent-font-color);
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-primary);
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+main {
+    margin: var(--gutter);
+    grid-column-start: 2;
+}
+
+button {
+    border: none;
+    background: var(--color-primary);
+    color: white;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    border-radius: 0.25em;
+
+    &.btn--link {
+        background: none;
+        color: var(--color-primary);
+        padding: 0;
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 400;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

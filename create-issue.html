@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Tracker - Create issue</title>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/defaults.css" />
+    <link rel="stylesheet" href="dist/utilities.css" />
+    <link rel="stylesheet" href="dist/composition.css" />
+    <link rel="stylesheet" href="dist/blocks.css" />
+</head>
+
+<body class="sidebar">
+    <menu class="app-menu stack">
+        <div class="cluster">
+            <p class="username"></p>
+            <button class="btn--link" id="logoutButton">Logout</button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="create-issue.html">Create issue</a></li>
+                <li><a href="index.html#details">Details view</a></li>
+                <li><a href="index.html#sprint">Sprint board</a></li>
+                <li><a href="create-user.html">Create user</a></li>
+            </ul>
+        </nav>
+    </menu>
+    <main class="flow">
+        <h1>Issues Tracker</h1>
+        <form name="createIssue" class="flow" novalidate>
+            <h2>Create issue</h2>
+            <div class="form-control">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required />
+                <p class="error-message"></p>
+            </div>
+            <div class="form-control">
+                <label for="assignee">Assignee</label>
+                <select name="assignee" id="assignee"></select>
+            </div>
+            <div class="form-control">
+                <label for="storyPoints">Story points</label>
+                <input type="text" inputmode="numeric" id="storyPoints" name="storyPoints"
+                    pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
+                <p class="error-message"></p>
+            </div>
+            <div class="form-control">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="10"></textarea>
+            </div>
+            <div class="cluster cluster--end"><button>Create</button></div>
+        </form>
+    </main>
+
+    <script src="dist/session.js"></script>
+    <script src="dist/forms.js"></script>
+    <script src="dist/issues.js"></script>
+    <script src="dist/create-issue.js"></script>
+</body>
+
+</html>
