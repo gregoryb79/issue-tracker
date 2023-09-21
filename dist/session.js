@@ -5,13 +5,11 @@ if (!currentUser && window.location.pathname !== "/login.html") {
     window.location.href = "login.html";
     throw new Error("User is not logged in.");
 }
-if (document.querySelector(".app-menu")) {
-    document.querySelector(".app-menu .username").textContent = currentUser;
-    document.querySelector("#logoutButton").addEventListener("click", () => {
-        sessionStorage.removeItem("user");
-        window.location.href = "login.html";
-    });
-}
+document.querySelector("#username").textContent = currentUser;
+document.querySelector("#logoutButton").addEventListener("click", () => {
+    sessionStorage.removeItem("user");
+    window.location.href = "login.html";
+});
 class InvalidCredentialsError extends Error {
     constructor() {
         super("Invalid username or password.");

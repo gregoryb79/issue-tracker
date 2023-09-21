@@ -1,43 +1,61 @@
 "use strict";
-if (!window.location.hash) {
-    window.location.hash = "#details";
+const detailsView = document.querySelector("#details-view");
+const sprintBoard = document.querySelector("#sprint-board");
+function updateView() {
+    switch (window.location.hash) {
+        case "#details":
+            showDetailsView();
+            break;
+        case "#sprint":
+            showSprintBoard();
+            break;
+        default:
+            window.location.hash = "#details";
+    }
 }
-document.body.classList.add(window.location.hash === "#details" ? "show-details" : "show-sprint");
-window.addEventListener("hashchange", () => {
-    document.body.classList.toggle("show-details", window.location.hash === "#details");
-    document.body.classList.toggle("show-sprint", window.location.hash === "#sprint");
-});
-if (!issues.length) {
-    document.body.classList.add("no-issues");
-}
-document.querySelector("#issue-list").innerHTML =
-    issues.map((issue) => `<li title="${issue.title}" class="ellipsis"><a href="?issueId=${issue.id}#details">${issue.title}</a></li>`).join("");
-document.querySelector("#assignee").innerHTML =
-    users.map((user) => `<option value="${user.username}">${user.username}</option>`).join("");
-const currentIssueId = new URLSearchParams(window.location.search).get("issueId");
-const currentIssue = issues.find((issue) => issue.id === currentIssueId);
-if (!currentIssueId) {
-    document.body.classList.add("no-issue-selected");
-}
-else if (!currentIssue) {
-    document.body.classList.add("issue-not-found");
-}
-else {
-    document.forms.namedItem("editIssue").querySelector("h3").textContent = currentIssue.title;
+updateView();
+window.addEventListener("hashchange", updateView);
+function showDetailsView() {
+    detailsView.classList.remove("hidden");
+    sprintBoard.classList.add("hidden");
+    if (!issues.length) {
+        detailsView.querySelector(".sidebar").classList.add("hidden");
+        detailsView.querySelector("#no-issues-cta").classList.remove("hidden");
+        return;
+    }
+    document.querySelector("#issue-list").innerHTML =
+        issues.map((issue) => `<li title="${issue.title}" class="ellipsis short-text"><a href="?issueId=${issue.id}#details">${issue.title}</a></li>`).join("");
+    document.querySelector("#assignee").innerHTML =
+        users.map((user) => `<option value="${user.username}">${user.username}</option>`).join("");
+    const currentIssueId = new URLSearchParams(window.location.search).get("issueId");
+    const currentIssue = issues.find((issue) => issue.id === currentIssueId);
+    if (!currentIssue) {
+        document.forms.namedItem("editIssue")?.classList.add("hidden");
+        if (currentIssueId) {
+            detailsView.querySelector("#issue-not-found-message")?.classList.remove("hidden");
+        }
+        return;
+    }
+    document.forms.namedItem("editIssue").elements.title.value = currentIssue.title;
     document.forms.namedItem("editIssue").elements.status.value = currentIssue.status;
     document.forms.namedItem("editIssue").elements.assignee.value = currentIssue.assignee;
     document.forms.namedItem("editIssue").elements.storyPoints.value = currentIssue.storyPoints.toString();
     document.forms.namedItem("editIssue").elements.remainingWork.value = currentIssue.remainingWork.toString();
     document.forms.namedItem("editIssue").elements.description.value = currentIssue.description;
+    document.forms.namedItem("editIssue").addEventListener("submit", (e) => {
+        currentIssue.title = e.target.elements.title.value;
+        currentIssue.status = e.target.elements.status.value;
+        currentIssue.assignee = e.target.elements.assignee.value;
+        currentIssue.storyPoints = Number(e.target.elements.storyPoints.value);
+        currentIssue.remainingWork = Number(e.target.elements.remainingWork.value);
+        currentIssue.description = e.target.elements.description.value;
+        saveIssues();
+    });
 }
-document.forms.namedItem("editIssue").addEventListener("submit", (e) => {
-    currentIssue.status = e.target.elements.status.value;
-    currentIssue.assignee = e.target.elements.assignee.value;
-    currentIssue.storyPoints = Number(e.target.elements.storyPoints.value);
-    currentIssue.remainingWork = Number(e.target.elements.remainingWork.value);
-    currentIssue.description = e.target.elements.description.value;
-    saveIssues();
-});
+function showSprintBoard() {
+    detailsView.classList.add("hidden");
+    sprintBoard.classList.remove("hidden");
+}
 function toCard(issue) {
     return `<li draggable="true" data-id="${issue.id}">
         <h4 title="${issue.title}" class="ellipsis"><a href="?issueId=${issue.id}#details">${issue.title}</a></h4>

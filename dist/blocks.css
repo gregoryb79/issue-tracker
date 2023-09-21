@@ -1,13 +1,3 @@
-.app-menu {
-  background: #eee;
-  padding: var(--gutter);
-}
-@media (prefers-color-scheme: dark) {
-  .app-menu {
-    background: #333;
-  }
-}
-
 .form-control {
   display: flex;
   flex-direction: column;

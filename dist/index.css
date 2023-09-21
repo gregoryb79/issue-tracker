@@ -1,54 +1,5 @@
-.details-view {
-  display: none;
-  flex: 1;
-}
-.show-details .details-view {
-  display: flex;
-}
-.details-view .sidebar {
-  flex: 1;
-  gap: var(--gutter);
-  align-items: baseline;
-}
-.details-view .sidebar ul {
-  background: #eee;
-  padding: var(--gutter);
-  height: 100%;
-}
-@media (prefers-color-scheme: dark) {
-  .details-view .sidebar ul {
-    background: #333;
-  }
-}
-.details-view .sidebar ul li {
-  max-width: 20ch;
-}
-.no-issues .details-view .sidebar ul {
-  display: none;
-}
-:where(.no-issue-selected, .issue-not-found, .no-issues) .details-view .sidebar form {
-  display: none;
-}
-.details-view .sidebar .issue-not-found-message {
-  display: none;
-}
-:not(.no-issues).issue-not-found .details-view .sidebar .issue-not-found-message {
-  display: block;
-}
-.details-view .sidebar .no-issues-cta {
-  display: none;
-  grid-column: span 2;
-}
-.no-issues .details-view .sidebar .no-issues-cta {
-  display: block;
-}
-
 .sprint-board {
-  display: none;
   flex: 1;
-}
-.show-sprint .sprint-board {
-  display: flex;
 }
 .sprint-board .columns {
   flex: 1;
@@ -58,14 +9,7 @@
   overflow: auto;
 }
 .sprint-board .column ul li {
-  background: #eee;
-  padding: var(--gutter);
   border-radius: 0.25em;
-}
-@media (prefers-color-scheme: dark) {
-  .sprint-board .column ul li {
-    background: #333;
-  }
 }
 .show-drop-zones .sprint-board .column ul {
   outline: 2px dashed var(--color-primary);

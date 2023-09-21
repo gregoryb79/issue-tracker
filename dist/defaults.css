@@ -1,15 +1,18 @@
 :root {
-  --body-font-color: #444;
-  --accent-font-color: black;
+  --color-font-body: #444;
+  --color-font-accent: black;
   --color-primary: hsl(211deg 90% 50%);
+  --color-surface-values: 0deg 0% 93%;
+  --color-surface: hsl(var(--color-surface-values));
   --color-danger: hsl(0deg 70% 50%);
   --gutter: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --body-font-color: #ddd;
-    --accent-font-color: white;
+    --color-font-body: #ddd;
+    --color-font-accent: white;
+    --color-surface-values: 0deg 0% 20%;
   }
 }
 html,
@@ -25,7 +28,15 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  color: var(--body-font-color);
+  color: var(--color-font-body);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+}
+
+header {
+  grid-column: span 2;
+  background: var(--color-surface);
 }
 
 h1,
@@ -36,7 +47,7 @@ h5,
 h6 {
   line-height: 1.2;
   letter-spacing: -0.1rem;
-  color: var(--accent-font-color);
+  color: var(--color-font-accent);
 }
 
 h1 {
@@ -53,11 +64,6 @@ h2 {
 h3 {
   font-size: 1.25rem;
   font-weight: 600;
-}
-
-main {
-  margin: var(--gutter);
-  grid-column-start: 2;
 }
 
 button {
