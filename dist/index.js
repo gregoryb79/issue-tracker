@@ -76,8 +76,8 @@ document.querySelectorAll("#new-column, #in-progress-column, #done-column").forE
         e.preventDefault();
         const issueId = e.dataTransfer.getData("text/plain");
         const issue = issues.find((issue) => issue.id === issueId);
-        issue.status = e.target.getAttribute("data-status");
+        issue.status = e.currentTarget.getAttribute("data-status");
         saveIssues();
-        e.target.appendChild(document.querySelector(`[data-id="${issueId}"]`));
+        e.currentTarget.appendChild(document.querySelector(`[data-id="${issueId}"]`));
     });
 });

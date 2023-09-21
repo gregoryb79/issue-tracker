@@ -96,9 +96,9 @@ document.querySelectorAll("#new-column, #in-progress-column, #done-column")!.for
         const issueId = e.dataTransfer.getData("text/plain");
         const issue = issues.find((issue) => issue.id === issueId)!;
 
-        issue.status = (e.target as Element).getAttribute("data-status") as Issue["status"];
+        issue.status = (e.currentTarget as Element).getAttribute("data-status") as Issue["status"];
         saveIssues();
 
-        (e.target as Element).appendChild(document.querySelector(`[data-id="${issueId}"]`)!);
+        (e.currentTarget as Element).appendChild(document.querySelector(`[data-id="${issueId}"]`)!);
     });
 });
