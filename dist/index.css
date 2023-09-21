@@ -1,0 +1,49 @@
+.details-view {
+  display: none;
+  flex: 1;
+}
+.show-details .details-view {
+  display: flex;
+}
+.details-view .sidebar {
+  flex: 1;
+  gap: var(--gutter);
+  align-items: baseline;
+}
+.details-view .sidebar ul {
+  background: #eee;
+  padding: var(--gutter);
+  height: 100%;
+}
+.details-view .sidebar ul li {
+  max-width: 20ch;
+}
+:where(.no-issue-selected, .issue-not-found) .details-view .sidebar form {
+  display: none;
+}
+.details-view .sidebar p {
+  display: none;
+}
+.issue-not-found .details-view .sidebar p {
+  display: block;
+}
+
+.sprint-board {
+  display: none;
+  flex: 1;
+}
+.show-sprint .sprint-board {
+  display: flex;
+}
+.sprint-board .columns {
+  flex: 1;
+}
+.sprint-board .column ul {
+  flex: 1 1 0;
+  overflow: auto;
+}
+.sprint-board .column ul li {
+  background: #eee;
+  padding: var(--gutter);
+  border-radius: 0.25em;
+}

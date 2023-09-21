@@ -1,0 +1,21 @@
+.center {
+  margin-inline: auto;
+}
+
+.medium {
+  max-width: 500px;
+}
+
+.danger {
+  color: var(--color-danger);
+}
+
+.align-center {
+  text-align: center;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
