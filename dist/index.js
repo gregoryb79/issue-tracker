@@ -33,8 +33,8 @@ else {
 document.forms.namedItem("editIssue").addEventListener("submit", (e) => {
     currentIssue.status = e.target.elements.status.value;
     currentIssue.assignee = e.target.elements.assignee.value;
-    currentIssue.storyPoints = parseInt(e.target.elements.storyPoints.value);
-    currentIssue.remainingWork = parseInt(e.target.elements.remainingWork.value);
+    currentIssue.storyPoints = Number(e.target.elements.storyPoints.value);
+    currentIssue.remainingWork = Number(e.target.elements.remainingWork.value);
     currentIssue.description = e.target.elements.description.value;
     saveIssues();
 });
