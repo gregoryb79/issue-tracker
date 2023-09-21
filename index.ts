@@ -39,7 +39,6 @@ document.forms.namedItem("editIssue")!.addEventListener("submit", (e) => {
     currentIssue!.status = (e.target as HTMLFormElement).elements.status!.value as Issue["status"];
     currentIssue!.assignee = (e.target as HTMLFormElement).elements.assignee!.value as Issue["assignee"];
     currentIssue!.storyPoints = parseInt((e.target as HTMLFormElement).elements.storyPoints!.value);
-    currentIssue!.remainingWork = parseInt((e.target as HTMLFormElement).elements.remainingWork!.value);
     currentIssue!.description = (e.target as HTMLFormElement).elements.description!.value;
 
     saveIssues();
@@ -66,13 +65,6 @@ document.querySelector("#done-column")!.innerHTML =
 
 document.querySelector(".columns")!.addEventListener("dragstart", (e) => {
     if (!(e instanceof DragEvent) || !e.dataTransfer) {
-        return;
-    }
-
-    const element = e.target as Element;
-
-    if (!element.hasAttribute("data-id")) {
-        e.preventDefault();
         return;
     }
 
@@ -105,7 +97,7 @@ document.querySelectorAll("#new-column, #in-progress-column, #done-column")!.for
         const issueId = e.dataTransfer.getData("text/plain");
         const issue = issues.find((issue) => issue.id === issueId)!;
 
-        issue.status = (e.currentTarget as Element).getAttribute("data-status") as Issue["status"];
+        issue.status = (e.target as Element).getAttribute("data-status") as Issue["status"];
         saveIssues();
 
         (e.currentTarget as Element).appendChild(document.querySelector(`[data-id="${issueId}"]`)!);

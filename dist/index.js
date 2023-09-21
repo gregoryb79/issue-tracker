@@ -34,7 +34,6 @@ document.forms.namedItem("editIssue").addEventListener("submit", (e) => {
     currentIssue.status = e.target.elements.status.value;
     currentIssue.assignee = e.target.elements.assignee.value;
     currentIssue.storyPoints = parseInt(e.target.elements.storyPoints.value);
-    currentIssue.remainingWork = parseInt(e.target.elements.remainingWork.value);
     currentIssue.description = e.target.elements.description.value;
     saveIssues();
 });
@@ -55,11 +54,6 @@ document.querySelector("#done-column").innerHTML =
     issues.filter((issue) => issue.status === "Done").map(toCard).join("");
 document.querySelector(".columns").addEventListener("dragstart", (e) => {
     if (!(e instanceof DragEvent) || !e.dataTransfer) {
-        return;
-    }
-    const element = e.target;
-    if (!element.hasAttribute("data-id")) {
-        e.preventDefault();
         return;
     }
     e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
@@ -83,7 +77,7 @@ document.querySelectorAll("#new-column, #in-progress-column, #done-column").forE
         e.preventDefault();
         const issueId = e.dataTransfer.getData("text/plain");
         const issue = issues.find((issue) => issue.id === issueId);
-        issue.status = e.currentTarget.getAttribute("data-status");
+        issue.status = e.target.getAttribute("data-status");
         saveIssues();
         e.currentTarget.appendChild(document.querySelector(`[data-id="${issueId}"]`));
     });

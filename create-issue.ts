@@ -1,5 +1,5 @@
 document.querySelector("#assignee")!.innerHTML =
-    users.map((user) => `<option value="${user.username}">${user.username}</option>`).join("");
+    users.map((user, index) => `<option value="${index}">${user.username}</option>`).join("");
 
 document.forms.namedItem("createIssue")!.addEventListener("submit", (e) => {
     const storyPoints = Number(e.target.elements.storyPoints!.value);
