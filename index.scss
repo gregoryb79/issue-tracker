@@ -16,8 +16,16 @@
             padding: var(--gutter);
             height: 100%;
 
+            @media (prefers-color-scheme: dark) {
+                background: #333;
+            }
+
             li {
                 max-width: 20ch;
+            }
+
+            .no-issues & {
+                display: none;
             }
         }
 
@@ -29,6 +37,15 @@
             display: none;
 
             .issue-not-found & {
+                display: block;
+            }
+        }
+
+        .no-issues-cta {
+            display: none;
+            grid-column: span 2;
+
+            .no-issues & {
                 display: block;
             }
         }
@@ -54,6 +71,11 @@
 
             li {
                 background: #eee;
+
+                @media (prefers-color-scheme: dark) {
+                    background: #333;
+                }
+
                 padding: var(--gutter);
                 border-radius: 0.25em;
             }

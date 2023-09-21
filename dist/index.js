@@ -7,6 +7,9 @@ window.addEventListener("hashchange", () => {
     document.body.classList.toggle("show-details", window.location.hash === "#details");
     document.body.classList.toggle("show-sprint", window.location.hash === "#sprint");
 });
+if (!issues.length) {
+    document.body.classList.add("no-issues");
+}
 document.querySelector("#issue-list").innerHTML =
     issues.map((issue) => `<li title="${issue.title}" class="ellipsis"><a href="?issueId=${issue.id}#details">${issue.title}</a></li>`).join("");
 document.querySelector("#assignee").innerHTML =

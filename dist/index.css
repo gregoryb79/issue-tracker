@@ -15,8 +15,16 @@
   padding: var(--gutter);
   height: 100%;
 }
+@media (prefers-color-scheme: dark) {
+  .details-view .sidebar ul {
+    background: #333;
+  }
+}
 .details-view .sidebar ul li {
   max-width: 20ch;
+}
+.no-issues .details-view .sidebar ul {
+  display: none;
 }
 :where(.no-issue-selected, .issue-not-found) .details-view .sidebar form {
   display: none;
@@ -25,6 +33,13 @@
   display: none;
 }
 .issue-not-found .details-view .sidebar p {
+  display: block;
+}
+.details-view .sidebar .no-issues-cta {
+  display: none;
+  grid-column: span 2;
+}
+.no-issues .details-view .sidebar .no-issues-cta {
   display: block;
 }
 
@@ -46,4 +61,9 @@
   background: #eee;
   padding: var(--gutter);
   border-radius: 0.25em;
+}
+@media (prefers-color-scheme: dark) {
+  .sprint-board .column ul li {
+    background: #333;
+  }
 }
