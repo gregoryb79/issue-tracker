@@ -68,6 +68,12 @@ document.querySelector(".columns")!.addEventListener("dragstart", (e) => {
     }
 
     e.dataTransfer.setData("text/plain", (e.target as Element).getAttribute("data-id")!);
+
+    document.body.classList.add("show-drop-zones");
+});
+
+document.querySelector(".columns")!.addEventListener("dragend", () => {
+    document.body.classList.remove("show-drop-zones");
 });
 
 document.querySelectorAll("#new-column, #in-progress-column, #done-column")!.forEach((column) => {

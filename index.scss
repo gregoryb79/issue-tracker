@@ -79,6 +79,10 @@
                 padding: var(--gutter);
                 border-radius: 0.25em;
             }
+
+            .show-drop-zones & {
+                outline: 2px dashed var(--color-primary);
+            }
         }
     }
 }

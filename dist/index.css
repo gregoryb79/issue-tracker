@@ -67,3 +67,6 @@
     background: #333;
   }
 }
+.show-drop-zones .sprint-board .column ul {
+  outline: 2px dashed var(--color-primary);
+}

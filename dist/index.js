@@ -56,6 +56,10 @@ document.querySelector(".columns").addEventListener("dragstart", (e) => {
         return;
     }
     e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
+    document.body.classList.add("show-drop-zones");
+});
+document.querySelector(".columns").addEventListener("dragend", () => {
+    document.body.classList.remove("show-drop-zones");
 });
 document.querySelectorAll("#new-column, #in-progress-column, #done-column").forEach((column) => {
     column.addEventListener("dragover", (e) => {
