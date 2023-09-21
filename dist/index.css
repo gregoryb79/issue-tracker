@@ -26,13 +26,13 @@
 .no-issues .details-view .sidebar ul {
   display: none;
 }
-:where(.no-issue-selected, .issue-not-found) .details-view .sidebar form {
+:where(.no-issue-selected, .issue-not-found, .no-issues) .details-view .sidebar form {
   display: none;
 }
 .details-view .sidebar p {
   display: none;
 }
-.issue-not-found .details-view .sidebar p {
+:not(.no-issues).issue-not-found .details-view .sidebar p {
   display: block;
 }
 .details-view .sidebar .no-issues-cta {

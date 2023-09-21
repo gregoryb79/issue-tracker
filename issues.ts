@@ -3,6 +3,7 @@ type Issue = {
     title: string;
     description: string;
     storyPoints: number;
+    remainingWork: number;
     assignee: string;
     status: "New" | "In Progress" | "Done";
 };

@@ -31,6 +31,7 @@ if (!currentIssueId) {
     document.forms.namedItem("editIssue")!.elements.status!.value = currentIssue.status;
     document.forms.namedItem("editIssue")!.elements.assignee!.value = currentIssue.assignee;
     document.forms.namedItem("editIssue")!.elements.storyPoints!.value = currentIssue.storyPoints.toString();
+    document.forms.namedItem("editIssue")!.elements.remainingWork!.value = currentIssue.remainingWork.toString();
     document.forms.namedItem("editIssue")!.elements.description!.value = currentIssue.description;
 }
 
@@ -38,6 +39,7 @@ document.forms.namedItem("editIssue")!.addEventListener("submit", (e) => {
     currentIssue!.status = (e.target as HTMLFormElement).elements.status!.value as Issue["status"];
     currentIssue!.assignee = (e.target as HTMLFormElement).elements.assignee!.value as Issue["assignee"];
     currentIssue!.storyPoints = parseInt((e.target as HTMLFormElement).elements.storyPoints!.value);
+    currentIssue!.remainingWork = parseInt((e.target as HTMLFormElement).elements.remainingWork!.value);
     currentIssue!.description = (e.target as HTMLFormElement).elements.description!.value;
 
     saveIssues();
@@ -45,10 +47,10 @@ document.forms.namedItem("editIssue")!.addEventListener("submit", (e) => {
 
 function toCard(issue: Issue) {
     return `<li draggable="true" data-id="${issue.id}">
-        <h4 title="${issue.title}" class="ellipsis">${issue.title}</h4>
+        <h4 title="${issue.title}" class="ellipsis"><a href="?issueId=${issue.id}#details">${issue.title}</a></h4>
         <div class="cluster cluster--distribute">
             <p>${issue.assignee}</p>
-            <p>${issue.storyPoints}</p>
+            <p><span title="Remaining work">${issue.remainingWork}</span> / <span title="Story points">${issue.storyPoints}</span></p>
         </div>
     </li>`
 }
@@ -64,6 +66,13 @@ document.querySelector("#done-column")!.innerHTML =
 
 document.querySelector(".columns")!.addEventListener("dragstart", (e) => {
     if (!(e instanceof DragEvent) || !e.dataTransfer) {
+        return;
+    }
+
+    const element = e.target as Element;
+
+    if (!element.hasAttribute("data-id")) {
+        e.preventDefault();
         return;
     }
 

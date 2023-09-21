@@ -55,6 +55,12 @@
                         <p class="error-message"></p>
                     </div>
                     <div class="form-control">
+                        <label for="remainingWork">Remaining work</label>
+                        <input type="text" inputmode="numeric" id="remainingWork" name="remainingWork"
+                            pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
+                        <p class="error-message"></p>
+                    </div>
+                    <div class="form-control">
                         <label for="description">Description</label>
                         <textarea id="description" name="description" rows="10"></textarea>
                     </div>

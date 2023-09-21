@@ -29,14 +29,14 @@
             }
         }
 
-        :where(.no-issue-selected, .issue-not-found) & form {
+        :where(.no-issue-selected, .issue-not-found, .no-issues) & form {
             display: none;
         }
 
         p {
             display: none;
 
-            .issue-not-found & {
+            :not(.no-issues).issue-not-found & {
                 display: block;
             }
         }
