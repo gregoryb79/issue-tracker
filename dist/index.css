@@ -29,10 +29,10 @@
 :where(.no-issue-selected, .issue-not-found, .no-issues) .details-view .sidebar form {
   display: none;
 }
-.details-view .sidebar p {
+.details-view .sidebar .issue-not-found-message {
   display: none;
 }
-:not(.no-issues).issue-not-found .details-view .sidebar p {
+:not(.no-issues).issue-not-found .details-view .sidebar .issue-not-found-message {
   display: block;
 }
 .details-view .sidebar .no-issues-cta {

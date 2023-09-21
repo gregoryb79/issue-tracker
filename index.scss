@@ -33,7 +33,7 @@
             display: none;
         }
 
-        p {
+        .issue-not-found-message {
             display: none;
 
             :not(.no-issues).issue-not-found & {
