@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
 }
+.form-control:hover, .form-control:focus-within {
+  color: var(--color-font-accent);
+}
 .form-control label {
   font-size: 0.7rem;
   line-height: 1.2;
@@ -23,18 +26,17 @@
 .form-control select {
     background: #222;
   }
+  .form-control input:focus-visible,
+.form-control textarea:focus-visible,
+.form-control select:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+  }
 }
 .was-validated .form-control input:invalid,
 .was-validated .form-control textarea:invalid,
 .was-validated .form-control select:invalid {
   border-color: var(--color-danger);
-}
-.form-control input:hover, .form-control input:focus-visible,
-.form-control textarea:hover,
-.form-control textarea:focus-visible,
-.form-control select:hover,
-.form-control select:focus-visible {
-  color: var(--color-font-accent);
 }
 .form-control .error-message {
   --line-height: 1.2;
