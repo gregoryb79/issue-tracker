@@ -1,16 +1,9 @@
-.app-menu {
-  background: #eee;
-  padding: var(--gutter);
-}
-@media (prefers-color-scheme: dark) {
-  .app-menu {
-    background: #333;
-  }
-}
-
 .form-control {
   display: flex;
   flex-direction: column;
+}
+.form-control:hover, .form-control:focus-within {
+  color: var(--color-font-accent);
 }
 .form-control label {
   font-size: 0.7rem;
@@ -32,6 +25,12 @@
 .form-control textarea,
 .form-control select {
     background: #222;
+  }
+  .form-control input:focus-visible,
+.form-control textarea:focus-visible,
+.form-control select:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
   }
 }
 .was-validated .form-control input:invalid,

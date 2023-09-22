@@ -1,87 +1,14 @@
-.details-view {
-    display: none;
-    flex: 1;
-
-    .show-details & {
-        display: flex;
-    }
-
-    .sidebar {
-        flex: 1;
-        gap: var(--gutter);
-        align-items: baseline;
-
-        ul {
-            background: #eee;
-            padding: var(--gutter);
-            height: 100%;
-
-            @media (prefers-color-scheme: dark) {
-                background: #333;
-            }
-
-            li {
-                max-width: 20ch;
-            }
-
-            .no-issues & {
-                display: none;
-            }
-        }
-
-        :where(.no-issue-selected, .issue-not-found, .no-issues) & form {
-            display: none;
-        }
-
-        p {
-            display: none;
-
-            :not(.no-issues).issue-not-found & {
-                display: block;
-            }
-        }
-
-        .no-issues-cta {
-            display: none;
-            grid-column: span 2;
-
-            .no-issues & {
-                display: block;
-            }
-        }
-    }
-}
-
-.sprint-board {
-    display: none;
-    flex: 1;
-
-    .show-sprint & {
-        display: flex;
-    }
-
+#sprint-board {
     .columns {
-        flex: 1;
+        overflow: hidden;
     }
 
     .column {
         ul {
-            flex: 1 1 0;
-            overflow: auto;
-
-            li {
-                background: #eee;
-
-                @media (prefers-color-scheme: dark) {
-                    background: #333;
-                }
-
-                padding: var(--gutter);
-                border-radius: 0.25em;
-            }
+            border: 2px dashed transparent;
 
             .show-drop-zones & {
-                outline: 2px dashed var(--color-primary);
+                border-color: var(--color-primary);
             }
         }
     }

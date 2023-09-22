@@ -7,85 +7,93 @@
     <title>Issue Tracker</title>
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/defaults.css" />
-    <link rel="stylesheet" href="dist/utilities.css" />
     <link rel="stylesheet" href="dist/composition.css" />
+    <link rel="stylesheet" href="dist/utilities.css" />
     <link rel="stylesheet" href="dist/blocks.css" />
     <link rel="stylesheet" href="dist/index.css" />
 </head>
 
-<body class="sidebar">
-    <menu class="app-menu stack">
-        <div class="cluster">
-            <p class="username"></p>
-            <button class="btn--link" id="logoutButton">Logout</button>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="create-issue.html">Create issue</a></li>
-                <li><a href="index.html#details">Details view</a></li>
-                <li><a href="index.html#sprint">Sprint board</a></li>
-                <li><a href="create-user.html">Create user</a></li>
-            </ul>
-        </nav>
-    </menu>
-    <main class="stack">
-        <h1>Issues Tracker</h1>
-        <div class="details-view stack">
-            <h2>Details view</h2>
-            <div class="sidebar">
-                <ul id="issue-list" class="stack"></ul>
-                <form name="editIssue" class="flow" novalidate>
-                    <h3></h3>
-                    <div class="form-control">
-                        <label for="status">Status</label>
-                        <select name="status" id="status">
-                            <option value="New">New</option>
-                            <option value="In Progress">In progress</option>
-                            <option value="Done">Done</option>
-                        </select>
-                    </div>
-                    <div class="form-control">
-                        <label for="assignee">Assignee</label>
-                        <select name="assignee" id="assignee"></select>
-                    </div>
-                    <div class="form-control">
-                        <label for="storyPoints">Story points</label>
-                        <input type="text" inputmode="numeric" id="storyPoints" name="storyPoints"
-                            pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
-                        <p class="error-message"></p>
-                    </div>
-                    <div class="form-control">
-                        <label for="remainingWork">Remaining work</label>
-                        <input type="text" inputmode="numeric" id="remainingWork" name="remainingWork"
-                            pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
-                        <p class="error-message"></p>
-                    </div>
-                    <div class="form-control">
-                        <label for="description">Description</label>
-                        <textarea id="description" name="description" rows="10"></textarea>
-                    </div>
-                    <div class="cluster cluster--end"><button>Save</button></div>
-                </form>
-                <p class="align-center">Issue not found.</p>
-                <div class="no-issues-cta center">
-                    There are no issues yet. <a href="create-issue.html">Create the first issue.</a>
+<body>
+    <header class="cluster gutter">
+        <h1>Issue Tracker</h1>
+        <h2>Details view</h2>
+        <p id="username" class="cluster__push"></p>
+        <button class="btn--link" id="logoutButton">Logout</button>
+    </header>
+    <nav class="surface gutter">
+        <ul class="stack">
+            <li><a href="create-issue.html">Create issue</a></li>
+            <li><a href="index.html#details">Details view</a></li>
+            <li><a href="index.html#sprint">Sprint board</a></li>
+            <li><a href="create-user.html">Create user</a></li>
+        </ul>
+    </nav>
+    <main class="full-height">
+        <div id="details-view" class="full-height">
+            <div class="sidebar full-height">
+                <div class="stack gutter bg-primary">
+                    <h3>Issues</h3>
+                    <ul id="issue-list" class="stack"></ul>
                 </div>
+                <form name="editIssue" class="stack full-height gutter" novalidate>
+                    <h3>Details</h3>
+                    <div class="scroll flow">
+                        <div class="form-control">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" required />
+                            <p class="error-message"></p>
+                        </div>
+                        <div class="form-control">
+                            <label for="status">Status</label>
+                            <select name="status" id="status">
+                                <option value="New">New</option>
+                                <option value="In Progress">In progress</option>
+                                <option value="Done">Done</option>
+                            </select>
+                        </div>
+                        <div class="form-control">
+                            <label for="assignee">Assignee</label>
+                            <select name="assignee" id="assignee"></select>
+                        </div>
+                        <div class="form-control">
+                            <label for="storyPoints">Story points</label>
+                            <input type="text" inputmode="numeric" id="storyPoints" name="storyPoints"
+                                pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
+                            <p class="error-message"></p>
+                        </div>
+                        <div class="form-control">
+                            <label for="remainingWork">Remaining work</label>
+                            <input type="text" inputmode="numeric" id="remainingWork" name="remainingWork"
+                                pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
+                            <p class="error-message"></p>
+                        </div>
+                        <div class="form-control">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="cluster cluster--end stack__fixed scroll"><button>Save</button></div>
+                </form>
+                <p id="issue-not-found-message" class="align-center gutter hidden">Issue not found.</p>
+            </div>
+            <div id="no-issues-cta" class="align-center gutter hidden">
+                There are no issues yet. <a href="create-issue.html">Create the first issue.</a>
             </div>
         </div>
-        <div class="sprint-board stack">
+        <div id="sprint-board" class="full-height stack gutter">
             <h2>Sprint board</h2>
-            <div class="columns">
-                <div class="column stack">
+            <div class="columns stack__grow">
+                <div class="column stack full-height">
                     <h3>New</h3>
-                    <ul id="new-column" class="stack" data-status="New"></ul>
+                    <ul id="new-column" class="stack stack__grow scroll" data-status="New"></ul>
                 </div>
-                <div class="column stack">
+                <div class="column stack full-height">
                     <h3>In Progress</h3>
-                    <ul id="in-progress-column" class="stack" data-status="In Progress"></ul>
+                    <ul id="in-progress-column" class="stack stack__grow scroll" data-status="In Progress"></ul>
                 </div>
-                <div class="column stack">
+                <div class="column stack full-height">
                     <h3>Done</h3>
-                    <ul id="done-column" class="stack" data-status="done"></ul>
+                    <ul id="done-column" class="stack stack__grow scroll" data-status="done"></ul>
                 </div>
             </div>
         </div>

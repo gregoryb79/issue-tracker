@@ -19,3 +19,67 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.gutter {
+    padding: var(--gutter);
+}
+
+.surface {
+    background: var(--color-surface);
+}
+
+.hidden {
+    display: none;
+}
+
+.full-height {
+    height: 100%;
+    overflow: hidden;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.short-text {
+    max-width: 25ch;
+}
+
+.scroll {
+    overflow: auto;
+    scrollbar-gutter: stable;
+    scrollbar-color: transparent transparent;
+
+    &::-webkit-scrollbar {
+        width: 0.5em;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+        background: hsl(var(--color-surface-values) / 0.5);
+        border-radius: 100vw;
+
+        &:hover {
+            background: var(--color-surface);
+        }
+    }
+}
+
+.bg-primary {
+    background: var(--color-primary);
+    --color-font-accent: var(--color-font-accent-light);
+    --color-font-link: var(--color-font-body-light);
+    --color-font-body: var(--color-font-body-light);
+    color: var(--color-font-body);
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--color-font-accent);
+        }
+    }
+}
+
+.rounded-corners {
+    border-radius: 0.25em;
+}

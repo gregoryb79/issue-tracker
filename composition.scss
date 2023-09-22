@@ -5,10 +5,15 @@
 .cluster {
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
     gap: var(--gutter);
 
+    &__push {
+        margin-left: auto;
+    }
+
     &--end {
-        flex-direction: row-reverse;
+        justify-content: end;
     }
 
     &--distribute {
@@ -16,11 +21,18 @@
     }
 }
 
-
 .stack {
     display: flex;
     flex-direction: column;
     gap: var(--gutter);
+
+    &__grow {
+        flex: 1;
+    }
+
+    &__fixed {
+        flex: 0 0 auto;
+    }
 }
 
 .sidebar {

@@ -7,50 +7,50 @@
     <title>Issue Tracker - Create issue</title>
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/defaults.css" />
-    <link rel="stylesheet" href="dist/utilities.css" />
     <link rel="stylesheet" href="dist/composition.css" />
+    <link rel="stylesheet" href="dist/utilities.css" />
     <link rel="stylesheet" href="dist/blocks.css" />
 </head>
 
 <body class="sidebar">
-    <menu class="app-menu stack">
-        <div class="cluster">
-            <p class="username"></p>
-            <button class="btn--link" id="logoutButton">Logout</button>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="create-issue.html">Create issue</a></li>
-                <li><a href="index.html#details">Details view</a></li>
-                <li><a href="index.html#sprint">Sprint board</a></li>
-                <li><a href="create-user.html">Create user</a></li>
-            </ul>
-        </nav>
-    </menu>
-    <main class="flow">
-        <h1>Issues Tracker</h1>
-        <form name="createIssue" class="flow" novalidate>
-            <h2>Create issue</h2>
-            <div class="form-control">
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" required />
-                <p class="error-message"></p>
+    <header class="cluster gutter">
+        <h1>Issue Tracker</h1>
+        <h2>Create issue</h2>
+        <p id="username" class="cluster__push"></p>
+        <button class="btn--link" id="logoutButton">Logout</button>
+    </header>
+    <nav class="surface gutter">
+        <ul class="stack">
+            <li><a href="create-issue.html">Create issue</a></li>
+            <li><a href="index.html#details">Details view</a></li>
+            <li><a href="index.html#sprint">Sprint board</a></li>
+            <li><a href="create-user.html">Create user</a></li>
+        </ul>
+    </nav>
+    <main class="gutter full-height">
+        <form name="createIssue" class="stack full-height" novalidate>
+            <div class="scroll flow">
+                <div class="form-control">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-control">
+                    <label for="assignee">Assignee</label>
+                    <select name="assignee" id="assignee"></select>
+                </div>
+                <div class="form-control">
+                    <label for="storyPoints">Story points</label>
+                    <input type="text" inputmode="numeric" id="storyPoints" name="storyPoints"
+                        pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-control">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="10"></textarea>
+                </div>
             </div>
-            <div class="form-control">
-                <label for="assignee">Assignee</label>
-                <select name="assignee" id="assignee"></select>
-            </div>
-            <div class="form-control">
-                <label for="storyPoints">Story points</label>
-                <input type="text" inputmode="numeric" id="storyPoints" name="storyPoints"
-                    pattern="(0|[1-9][0-9]*)(\.\d+)?" required />
-                <p class="error-message"></p>
-            </div>
-            <div class="form-control">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" rows="10"></textarea>
-            </div>
-            <div class="cluster cluster--end"><button>Create</button></div>
+            <div class="cluster cluster--end stack__fixed scroll"><button>Create</button></div>
         </form>
     </main>
 

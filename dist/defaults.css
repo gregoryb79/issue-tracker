@@ -1,15 +1,27 @@
 :root {
-  --body-font-color: #444;
-  --accent-font-color: black;
-  --color-primary: hsl(211deg 90% 50%);
+  --color-primary-lighter: hsl(0, 74%, 81%);
+  --color-primary: #ef9f9f;
+  --color-primary-darker: #eb9494;
+  --color-secondary: #f4d9be;
+  --color-accent: #c42173;
+  --color-surface-values: 0deg 0% 93%;
+  --color-surface: hsl(var(--color-surface-values));
   --color-danger: hsl(0deg 70% 50%);
+  --color-font-body-light: #444;
+  --color-font-body-dark: #ddd;
+  --color-font-body: var(--color-font-body-light);
+  --color-font-accent-light: black;
+  --color-font-accent-dark: white;
+  --color-font-accent: var(--color-font-accent-light);
+  --color-font-link: var(--color-primary);
   --gutter: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --body-font-color: #ddd;
-    --accent-font-color: white;
+    --color-font-body: var(--color-font-body-dark);
+    --color-font-accent: var(--color-font-accent-dark);
+    --color-surface-values: 0deg 0% 20%;
   }
 }
 html,
@@ -25,7 +37,15 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  color: var(--body-font-color);
+  color: var(--color-font-body);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+}
+
+header {
+  grid-column: span 2;
+  background: var(--color-surface);
 }
 
 h1,
@@ -35,29 +55,31 @@ h4,
 h5,
 h6 {
   line-height: 1.2;
-  letter-spacing: -0.1rem;
-  color: var(--accent-font-color);
+  letter-spacing: -0.05rem;
+  color: var(--color-font-accent);
 }
 
 h1 {
   font-size: 2rem;
   font-weight: 900;
   color: var(--color-primary);
+  letter-spacing: -0.08rem;
 }
 
 h2 {
   font-size: 1.5rem;
   font-weight: 700;
+  letter-spacing: -0.07rem;
 }
 
 h3 {
   font-size: 1.25rem;
   font-weight: 600;
+  letter-spacing: -0.06rem;
 }
 
-main {
-  margin: var(--gutter);
-  grid-column-start: 2;
+select {
+  cursor: pointer;
 }
 
 button {
@@ -71,6 +93,14 @@ button {
   text-transform: uppercase;
   letter-spacing: -0.05em;
   border-radius: 0.25em;
+  transition: scale 50ms ease-in;
+}
+button:hover {
+  background: var(--color-primary-darker);
+}
+button:active {
+  background: var(--color-primary-lighter);
+  scale: 0.97;
 }
 button.btn--link {
   background: none;
@@ -85,7 +115,7 @@ button.btn--link:hover {
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-font-link);
   text-decoration: none;
 }
 a:hover {
