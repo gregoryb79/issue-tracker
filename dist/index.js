@@ -57,6 +57,47 @@ function showDetailsView() {
 function showSprintBoard() {
     detailsView.classList.add("hidden");
     sprintBoard.classList.remove("hidden");
+    document.querySelector("#new-column").innerHTML =
+        issues.filter((issue) => issue.status === "New").map(toCard).join("");
+    document.querySelector("#in-progress-column").innerHTML =
+        issues.filter((issue) => issue.status === "In Progress").map(toCard).join("");
+    document.querySelector("#done-column").innerHTML =
+        issues.filter((issue) => issue.status === "Done").map(toCard).join("");
+    document.querySelector(".columns").addEventListener("dragstart", (e) => {
+        if (!(e instanceof DragEvent) || !e.dataTransfer) {
+            return;
+        }
+        const element = e.target;
+        if (!element.hasAttribute("data-id")) {
+            e.preventDefault();
+            return;
+        }
+        e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
+        document.body.classList.add("show-drop-zones");
+    });
+    document.querySelector(".columns").addEventListener("dragend", () => {
+        document.body.classList.remove("show-drop-zones");
+    });
+    document.querySelectorAll("#new-column, #in-progress-column, #done-column").forEach((column) => {
+        column.addEventListener("dragover", (e) => {
+            if (!(e instanceof DragEvent) || !e.dataTransfer) {
+                return;
+            }
+            e.preventDefault();
+            e.dataTransfer.dropEffect = "move";
+        });
+        column.addEventListener("drop", (e) => {
+            if (!(e instanceof DragEvent) || !e.dataTransfer) {
+                return;
+            }
+            e.preventDefault();
+            const issueId = e.dataTransfer.getData("text/plain");
+            const issue = issues.find((issue) => issue.id === issueId);
+            issue.status = e.currentTarget.getAttribute("data-status");
+            saveIssues();
+            e.currentTarget.appendChild(document.querySelector(`[data-id="${issueId}"]`));
+        });
+    });
 }
 function toCard(issue) {
     return `<li draggable="true" data-id="${issue.id}" class="surface gutter flow rounded-corners">
@@ -67,44 +108,3 @@ function toCard(issue) {
         </div>
     </li>`;
 }
-document.querySelector("#new-column").innerHTML =
-    issues.filter((issue) => issue.status === "New").map(toCard).join("");
-document.querySelector("#in-progress-column").innerHTML =
-    issues.filter((issue) => issue.status === "In Progress").map(toCard).join("");
-document.querySelector("#done-column").innerHTML =
-    issues.filter((issue) => issue.status === "Done").map(toCard).join("");
-document.querySelector(".columns").addEventListener("dragstart", (e) => {
-    if (!(e instanceof DragEvent) || !e.dataTransfer) {
-        return;
-    }
-    const element = e.target;
-    if (!element.hasAttribute("data-id")) {
-        e.preventDefault();
-        return;
-    }
-    e.dataTransfer.setData("text/plain", e.target.getAttribute("data-id"));
-    document.body.classList.add("show-drop-zones");
-});
-document.querySelector(".columns").addEventListener("dragend", () => {
-    document.body.classList.remove("show-drop-zones");
-});
-document.querySelectorAll("#new-column, #in-progress-column, #done-column").forEach((column) => {
-    column.addEventListener("dragover", (e) => {
-        if (!(e instanceof DragEvent) || !e.dataTransfer) {
-            return;
-        }
-        e.preventDefault();
-        e.dataTransfer.dropEffect = "move";
-    });
-    column.addEventListener("drop", (e) => {
-        if (!(e instanceof DragEvent) || !e.dataTransfer) {
-            return;
-        }
-        e.preventDefault();
-        const issueId = e.dataTransfer.getData("text/plain");
-        const issue = issues.find((issue) => issue.id === issueId);
-        issue.status = e.currentTarget.getAttribute("data-status");
-        saveIssues();
-        e.currentTarget.appendChild(document.querySelector(`[data-id="${issueId}"]`));
-    });
-});
