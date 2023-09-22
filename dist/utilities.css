@@ -56,3 +56,17 @@
 .scroll:hover::-webkit-scrollbar-thumb:hover {
   background: var(--color-surface);
 }
+
+.bg-primary {
+  background: var(--color-primary);
+  --color-font-accent: var(--color-font-accent-light);
+  --color-font-link: var(--color-font-body-light);
+  --color-font-body: var(--color-font-body-light);
+  color: var(--color-font-body);
+}
+.bg-primary a {
+  text-decoration: underline;
+}
+.bg-primary a:hover {
+  color: var(--color-font-accent);
+}

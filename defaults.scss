@@ -1,20 +1,29 @@
 :root {
-    --color-font-body: #444;
-    --color-font-accent: black;
-
-    --color-primary: hsl(211deg 90% 50%);
+    --color-primary: #ef9f9f;
+    --color-secondary: #f4d9be;
+    --color-accent: #c42173;
 
     --color-surface-values: 0deg 0% 93%;
     --color-surface: hsl(var(--color-surface-values));
     --color-danger: hsl(0deg 70% 50%);
+
+    --color-font-body-light: #444;
+    --color-font-body-dark: #ddd;
+    --color-font-body: var(--color-font-body-light);
+
+    --color-font-accent-light: black;
+    --color-font-accent-dark: white;
+    --color-font-accent: var(--color-font-accent-light);
+
+    --color-font-link: var(--color-primary);
 
     --gutter: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-font-body: #ddd;
-        --color-font-accent: white;
+        --color-font-body: var(--color-font-body-dark);
+        --color-font-accent: var(--color-font-accent-dark);
 
         --color-surface-values: 0deg 0% 20%;
     }
@@ -98,7 +107,7 @@ button {
 }
 
 a {
-    color: var(--color-primary);
+    color: var(--color-font-link);
     text-decoration: none;
 
     &:hover {

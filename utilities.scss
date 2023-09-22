@@ -59,3 +59,19 @@
         }
     }
 }
+
+.bg-primary {
+    background: var(--color-primary);
+    --color-font-accent: var(--color-font-accent-light);
+    --color-font-link: var(--color-font-body-light);
+    --color-font-body: var(--color-font-body-light);
+    color: var(--color-font-body);
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--color-font-accent);
+        }
+    }
+}

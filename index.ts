@@ -1,6 +1,9 @@
 const detailsView = document.querySelector("#details-view")!;
 const sprintBoard = document.querySelector("#sprint-board")!;
 
+document.querySelector("#assignee")!.innerHTML =
+    users.map((user) => `<option value="${user.username}">${user.username}</option>`).join("");
+
 function updateView() {
     switch (window.location.hash) {
         case "#details":
@@ -29,14 +32,14 @@ function showDetailsView() {
         return;
     }
 
-    document.querySelector("#issue-list")!.innerHTML =
-        issues.map((issue) => `<li title="${issue.title}" class="ellipsis short-text"><a href="?issueId=${issue.id}#details">${issue.title}</a></li>`).join("");
-
-    document.querySelector("#assignee")!.innerHTML =
-        users.map((user) => `<option value="${user.username}">${user.username}</option>`).join("");
-
     const currentIssueId = new URLSearchParams(window.location.search).get("issueId");
     const currentIssue = issues.find((issue) => issue.id === currentIssueId);
+
+    document.querySelector("#issue-list")!.innerHTML =
+        issues.map((issue) => `<li title="${issue.title}" class="ellipsis short-text">${issue === currentIssue ?
+                issue.title :
+                `<a href="?issueId=${issue.id}#details">${issue.title}</a>`
+            }</li>`).join("");
 
     if (!currentIssue) {
         document.forms.namedItem("editIssue")?.classList.add("hidden");
