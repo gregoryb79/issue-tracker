@@ -25,6 +25,11 @@
         .was-validated &:invalid {
             border-color: var(--color-danger);
         }
+
+        &:hover,
+        &:focus-visible {
+            color: var(--color-font-accent);
+        }
     }
 
     .error-message {

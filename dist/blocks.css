@@ -29,6 +29,13 @@
 .was-validated .form-control select:invalid {
   border-color: var(--color-danger);
 }
+.form-control input:hover, .form-control input:focus-visible,
+.form-control textarea:hover,
+.form-control textarea:focus-visible,
+.form-control select:hover,
+.form-control select:focus-visible {
+  color: var(--color-font-accent);
+}
 .form-control .error-message {
   --line-height: 1.2;
   height: calc(var(--line-height) * 1em);
