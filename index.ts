@@ -37,8 +37,8 @@ function showDetailsView() {
 
     document.querySelector("#issue-list")!.innerHTML =
         issues.map((issue) => `<li title="${issue.title}" class="ellipsis short-text">${issue === currentIssue ?
-                issue.title :
-                `<a href="?issueId=${issue.id}#details">${issue.title}</a>`
+            issue.title :
+            `<a href="?issueId=${issue.id}#details">${issue.title}</a>`
             }</li>`).join("");
 
     if (!currentIssue) {
@@ -75,7 +75,7 @@ function showSprintBoard() {
 }
 
 function toCard(issue: Issue) {
-    return `<li draggable="true" data-id="${issue.id}">
+    return `<li draggable="true" data-id="${issue.id}" class="surface gutter flow rounded-corners">
         <h4 title="${issue.title}" class="ellipsis"><a href="?issueId=${issue.id}#details">${issue.title}</a></h4>
         <div class="cluster cluster--distribute">
             <p>${issue.assignee}</p>

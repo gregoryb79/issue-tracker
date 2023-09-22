@@ -1,16 +1,9 @@
-.sprint-board {
-  flex: 1;
+#sprint-board .columns {
+  overflow: hidden;
 }
-.sprint-board .columns {
-  flex: 1;
+#sprint-board .column ul {
+  border: 2px dashed transparent;
 }
-.sprint-board .column ul {
-  flex: 1 1 0;
-  overflow: auto;
-}
-.sprint-board .column ul li {
-  border-radius: 0.25em;
-}
-.show-drop-zones .sprint-board .column ul {
-  outline: 2px dashed var(--color-primary);
+.show-drop-zones #sprint-board .column ul {
+  border-color: var(--color-primary);
 }

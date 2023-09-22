@@ -59,7 +59,7 @@ function showSprintBoard() {
     sprintBoard.classList.remove("hidden");
 }
 function toCard(issue) {
-    return `<li draggable="true" data-id="${issue.id}">
+    return `<li draggable="true" data-id="${issue.id}" class="surface gutter flow rounded-corners">
         <h4 title="${issue.title}" class="ellipsis"><a href="?issueId=${issue.id}#details">${issue.title}</a></h4>
         <div class="cluster cluster--distribute">
             <p>${issue.assignee}</p>

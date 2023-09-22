@@ -70,3 +70,7 @@
 .bg-primary a:hover {
   color: var(--color-font-accent);
 }
+
+.rounded-corners {
+  border-radius: 0.25em;
+}

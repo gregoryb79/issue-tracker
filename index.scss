@@ -1,21 +1,14 @@
-.sprint-board {
-    flex: 1;
-
+#sprint-board {
     .columns {
-        flex: 1;
+        overflow: hidden;
     }
 
     .column {
         ul {
-            flex: 1 1 0;
-            overflow: auto;
-
-            li {
-                border-radius: 0.25em;
-            }
+            border: 2px dashed transparent;
 
             .show-drop-zones & {
-                outline: 2px dashed var(--color-primary);
+                border-color: var(--color-primary);
             }
         }
     }

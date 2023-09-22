@@ -31,7 +31,7 @@
     <main class="full-height">
         <div id="details-view" class="full-height">
             <div class="sidebar full-height">
-                <div class="stack gutter surface bg-primary">
+                <div class="stack gutter bg-primary">
                     <h3>Issues</h3>
                     <ul id="issue-list" class="stack"></ul>
                 </div>
@@ -80,20 +80,20 @@
                 There are no issues yet. <a href="create-issue.html">Create the first issue.</a>
             </div>
         </div>
-        <div id="sprint-board" class="full-height">
+        <div id="sprint-board" class="full-height stack gutter">
             <h2>Sprint board</h2>
-            <div class="columns">
-                <div class="column stack">
+            <div class="columns stack__grow">
+                <div class="column stack full-height">
                     <h3>New</h3>
-                    <ul id="new-column" class="stack" data-status="New"></ul>
+                    <ul id="new-column" class="stack stack__grow scroll" data-status="New"></ul>
                 </div>
-                <div class="column stack">
+                <div class="column stack full-height">
                     <h3>In Progress</h3>
-                    <ul id="in-progress-column" class="stack" data-status="In Progress"></ul>
+                    <ul id="in-progress-column" class="stack stack__grow scroll" data-status="In Progress"></ul>
                 </div>
-                <div class="column stack">
+                <div class="column stack full-height">
                     <h3>Done</h3>
-                    <ul id="done-column" class="stack" data-status="Done"></ul>
+                    <ul id="done-column" class="stack stack__grow scroll" data-status="Done"></ul>
                 </div>
             </div>
         </div>
