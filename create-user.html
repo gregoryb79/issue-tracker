@@ -7,47 +7,49 @@
     <title>Issue Tracker - Create user</title>
     <link rel="stylesheet" href="dist/reset.css" />
     <link rel="stylesheet" href="dist/defaults.css" />
-    <link rel="stylesheet" href="dist/utilities.css" />
     <link rel="stylesheet" href="dist/composition.css" />
+    <link rel="stylesheet" href="dist/utilities.css" />
     <link rel="stylesheet" href="dist/blocks.css" />
 </head>
 
 <body class="sidebar">
-    <menu class="app-menu stack">
-        <div class="cluster">
-            <p class="username"></p>
-            <button class="btn--link" id="logoutButton">Logout</button>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="create-issue.html">Create issue</a></li>
-                <li><a href="index.html#details">Details view</a></li>
-                <li><a href="index.html#sprint">Sprint board</a></li>
-                <li><a href="create-user.html">Create user</a></li>
-            </ul>
-        </nav>
-    </menu>
-    <main class="flow">
+    <header class="cluster gutter">
         <h1>Issue Tracker</h1>
-        <form name="createUser" class="flow" novalidate>
-            <h2>Create user</h2>
-            <div class="form-control">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required autofocus />
-                <p class="error-message"></p>
+        <h2>Create user</h2>
+        <p id="username" class="cluster__push"></p>
+        <button class="btn--link" id="logoutButton">Logout</button>
+    </header>
+    <nav class="surface gutter">
+        <ul class="stack">
+            <li><a href="create-issue.html">Create issue</a></li>
+            <li><a href="index.html#details">Details view</a></li>
+            <li><a href="index.html#sprint">Sprint board</a></li>
+            <li><a href="create-user.html">Create user</a></li>
+        </ul>
+    </nav>
+    <main class="full-height gutter">
+        <form name="createUser" class="stack full-height" novalidate>
+            <div class="scroll flow">
+                <div class="form-control">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required autofocus />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-control">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required />
+                    <p class="error-message"></p>
+                </div>
+                <div class="form-control">
+                    <label for="confirmPassword">Confirm password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required />
+                    <p class="error-message"></p>
+                </div>
             </div>
-            <div class="form-control">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required />
-                <p class="error-message"></p>
+            <div class="cluster cluster--end stack__fixed scroll">
+                <p class="danger align-center form-error stack__fixed"></p>
+                <button>Create</button>
             </div>
-            <div class="form-control">
-                <label for="confirmPassword">Confirm password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required />
-                <p class="error-message"></p>
-            </div>
-            <div class="cluster cluster--end"><button>Create</button></div>
-            <p class="danger align-center form-error"></p>
         </form>
     </main>
 

@@ -16,7 +16,7 @@ if (!currentUser && window.location.pathname !== "/login.html") {
 
 document.querySelector("#username")!.textContent = currentUser;
 
-document.querySelector("#logoutButton")!.addEventListener("click", () => {
+document.querySelector("#logoutButton")?.addEventListener("click", () => {
     sessionStorage.removeItem("user");
     window.location.href = "login.html";
 });
