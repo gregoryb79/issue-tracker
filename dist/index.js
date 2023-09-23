@@ -1,4 +1,5 @@
 "use strict";
+const dateFromatter = new Intl.DateTimeFormat();
 const detailsView = document.querySelector("#details-view");
 const sprintBoard = document.querySelector("#sprint-board");
 document.querySelector("#assignee").innerHTML =
@@ -38,6 +39,9 @@ function showDetailsView() {
         }
         return;
     }
+    document.querySelector("#created-by").textContent = currentIssue.createdBy;
+    document.querySelector("#created-at").textContent = dateFromatter.format(currentIssue.createdAt);
+    document.querySelector("#created-at").setAttribute("datetime", currentIssue.createdAt.toString());
     document.forms.namedItem("editIssue").elements.title.value = currentIssue.title;
     document.forms.namedItem("editIssue").elements.status.value = currentIssue.status;
     document.forms.namedItem("editIssue").elements.assignee.value = currentIssue.assignee;

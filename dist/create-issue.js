@@ -2,10 +2,16 @@
 document.querySelector("#assignee").innerHTML =
     users.map((user) => `<option value="${user.username}">${user.username}</option>`).join("");
 document.forms.namedItem("createIssue").addEventListener("submit", (e) => {
+    if (!currentUser) {
+        setFormError(e.target, "Must be logged in to create an issue.");
+        return;
+    }
     const storyPoints = Number(e.target.elements.storyPoints.value);
     createIssue({
         id: crypto.randomUUID(),
         title: e.target.elements.title.value,
+        createdBy: currentUser,
+        createdAt: new Date().valueOf(),
         description: e.target.elements.description.value,
         storyPoints,
         remainingWork: storyPoints,
