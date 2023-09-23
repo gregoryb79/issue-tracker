@@ -16,11 +16,24 @@ function updateView() {
         default:
             window.location.hash = "#details";
     }
+
+    bindNavigationLinks();
+}
+
+function navigate(e: MouseEvent) {
+    e.preventDefault();
+    history.pushState({}, "Issue Tracker", (e.target as HTMLAnchorElement).href);
+    updateView();
+}
+
+function bindNavigationLinks() {
+    document.querySelectorAll("[data-link]").forEach((el) => (el as HTMLAnchorElement).addEventListener("click", navigate));
 }
 
 updateView();
 
 window.addEventListener("hashchange", updateView);
+window.addEventListener("popstate", updateView);
 
 function showDetailsView() {
     detailsView.classList.remove("hidden");
@@ -39,7 +52,7 @@ function showDetailsView() {
     document.querySelector("#issue-list")!.innerHTML =
         issues.map((issue) => `<li title="${issue.title}" class="ellipsis short-text">${issue === currentIssue ?
             issue.title :
-            `<a href="?issueId=${issue.id}#details">${issue.title}</a>`
+            `<a data-link href="?issueId=${issue.id}#details">${issue.title}</a>`
             }</li>`).join("");
 
     if (!currentIssue) {
@@ -51,6 +64,9 @@ function showDetailsView() {
 
         return;
     }
+
+    document.forms.namedItem("editIssue")?.classList.remove("hidden");
+    detailsView.querySelector("#issue-not-found-message")?.classList.add("hidden");
 
     document.querySelector("#created-by")!.textContent = currentIssue.createdBy;
     document.querySelector("#created-at")!.textContent = dateFromatter.format(currentIssue.createdAt);
@@ -138,7 +154,7 @@ function showSprintBoard() {
 
 function toCard(issue: Issue) {
     return `<li draggable="true" data-id="${issue.id}" class="surface gutter flow rounded-corners">
-        <h4 title="${issue.title}" class="ellipsis"><a href="?issueId=${issue.id}#details">${issue.title}</a></h4>
+        <h4 title="${issue.title}" class="ellipsis"><a data-link href="?issueId=${issue.id}#details">${issue.title}</a></h4>
         <div class="cluster cluster--distribute">
             <p>${issue.assignee}</p>
             <p><span title="Remaining work">${issue.remainingWork}</span> / <span title="Story points">${issue.storyPoints}</span></p>
