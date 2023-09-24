@@ -111,9 +111,50 @@ function showSprintBoard() {
             const issue = issues.find((issue) => issue.id === issueId);
             issue.status = e.currentTarget.getAttribute("data-status");
             saveIssues();
-            e.currentTarget.appendChild(document.querySelector(`[data-id="${issueId}"]`));
+            const cardToMove = document.querySelector(`[data-id="${issueId}"]`);
+            const originalPosition = cardToMove.getBoundingClientRect();
+            const cardsToSlide = getCardsUnder(cardToMove);
+            const slidingCardsOriginalPositions = cardsToSlide.map((card) => card.getBoundingClientRect());
+            e.currentTarget.appendChild(cardToMove);
+            const updatedPosition = cardToMove.getBoundingClientRect();
+            cardToMove.style.setProperty("translate", `${originalPosition.x - updatedPosition.x}px ${originalPosition.y - updatedPosition.y}px`);
+            cardToMove.style.setProperty("width", `${originalPosition.width}px`);
+            cardToMove.style.setProperty("top", `${updatedPosition.top}px`);
+            cardToMove.style.setProperty("position", "fixed");
+            cardsToSlide.forEach((card, i) => {
+                const updatedPosition = card.getBoundingClientRect();
+                card.style.setProperty("translate", `0 ${slidingCardsOriginalPositions[i].y - updatedPosition.y}px`);
+            });
+            requestAnimationFrame(() => {
+                cardToMove.style.setProperty("transition", "translate 400ms ease-in-out");
+                cardToMove.style.setProperty("translate", "0");
+                cardsToSlide.forEach((card) => {
+                    card.style.setProperty("transition", "translate 400ms ease-in-out");
+                    card.style.setProperty("translate", "0");
+                });
+                setTimeout(() => {
+                    cardToMove.style.setProperty("transition", null);
+                    cardToMove.style.setProperty("translate", null);
+                    cardToMove.style.setProperty("width", null);
+                    cardToMove.style.setProperty("top", null);
+                    cardToMove.style.setProperty("position", null);
+                    cardsToSlide.forEach((card) => {
+                        card.style.setProperty("transition", null);
+                        card.style.setProperty("translate", null);
+                    });
+                }, 400);
+            });
         });
     });
+}
+function getCardsUnder(card) {
+    let currentCard = card;
+    const cards = [];
+    while (currentCard.nextElementSibling) {
+        cards.push(currentCard.nextElementSibling);
+        currentCard = currentCard.nextElementSibling;
+    }
+    return cards;
 }
 function toCard(issue) {
     return `<li draggable="true" data-id="${issue.id}" class="surface gutter flow rounded-corners">
