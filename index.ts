@@ -33,7 +33,6 @@ function bindNavigationLinks() {
 updateView();
 
 window.addEventListener("hashchange", updateView);
-window.addEventListener("popstate", updateView);
 
 function showDetailsView() {
     detailsView.classList.remove("hidden");
@@ -64,9 +63,6 @@ function showDetailsView() {
 
         return;
     }
-
-    document.forms.namedItem("editIssue")?.classList.remove("hidden");
-    detailsView.querySelector("#issue-not-found-message")?.classList.add("hidden");
 
     document.querySelector("#created-by")!.textContent = currentIssue.createdBy;
     document.querySelector("#created-at")!.textContent = dateFromatter.format(currentIssue.createdAt);
@@ -189,7 +185,11 @@ function showSprintBoard() {
 }
 
 function getCardsUnder(card: HTMLElement) {
-    let currentCard = card;
+    if (!card.nextElementSibling) {
+        return [];
+    }
+
+    let currentCard = card.nextElementSibling as HTMLElement;
     const cards = [] as HTMLElement[];
 
     while (currentCard.nextElementSibling) {
