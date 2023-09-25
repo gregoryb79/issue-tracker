@@ -1,3 +1,4 @@
+const dateFromatter = new Intl.DateTimeFormat()
 const detailsView = document.querySelector("#details-view")!;
 const sprintBoard = document.querySelector("#sprint-board")!;
 
@@ -15,11 +16,24 @@ function updateView() {
         default:
             window.location.hash = "#details";
     }
+
+    bindNavigationLinks();
+}
+
+function navigate(e: MouseEvent) {
+    e.preventDefault();
+    history.pushState({}, "Issue Tracker", (e.target as HTMLAnchorElement).href);
+    updateView();
+}
+
+function bindNavigationLinks() {
+    document.querySelectorAll("[data-link]").forEach((el) => (el as HTMLAnchorElement).addEventListener("click", navigate));
 }
 
 updateView();
 
 window.addEventListener("hashchange", updateView);
+window.addEventListener("popstate", updateView);
 
 function showDetailsView() {
     detailsView.classList.remove("hidden");
@@ -38,7 +52,7 @@ function showDetailsView() {
     document.querySelector("#issue-list")!.innerHTML =
         issues.map((issue) => `<li title="${issue.title}" class="ellipsis short-text">${issue === currentIssue ?
             issue.title :
-            `<a href="?issueId=${issue.id}#details">${issue.title}</a>`
+            `<a data-link href="?issueId=${issue.id}#details">${issue.title}</a>`
             }</li>`).join("");
 
     if (!currentIssue) {
@@ -50,6 +64,13 @@ function showDetailsView() {
 
         return;
     }
+
+    document.forms.namedItem("editIssue")?.classList.remove("hidden");
+    detailsView.querySelector("#issue-not-found-message")?.classList.add("hidden");
+
+    document.querySelector("#created-by")!.textContent = currentIssue.createdBy;
+    document.querySelector("#created-at")!.textContent = dateFromatter.format(currentIssue.createdAt);
+    document.querySelector("#created-at")!.setAttribute("datetime", currentIssue.createdAt.toString());
 
     document.forms.namedItem("editIssue")!.elements.title!.value = currentIssue.title;
     document.forms.namedItem("editIssue")!.elements.status!.value = currentIssue.status;
@@ -65,6 +86,8 @@ function showDetailsView() {
         currentIssue!.description = (e.target as HTMLFormElement).elements.description!.value;
 
         saveIssues();
+
+        document.querySelector("#toaster")!.appendChild(toast("Issue saved."));
     });
 }
 
@@ -118,17 +141,83 @@ function showSprintBoard() {
             issue.status = (e.target as Element).getAttribute("data-status") as Issue["status"];
             saveIssues();
 
-            (e.currentTarget as Element).appendChild(document.querySelector(`[data-id="${issueId}"]`)!);
+            const cardToMove = document.querySelector(`[data-id="${issueId}"]`) as HTMLElement;
+            const originalPosition = cardToMove.getBoundingClientRect();
+
+            const cardsToSlide = getCardsUnder(cardToMove);
+            const slidingCardsOriginalPositions = cardsToSlide.map((card) => card.getBoundingClientRect());
+
+            (e.currentTarget as Element).appendChild(cardToMove);
+
+            const updatedPosition = cardToMove.getBoundingClientRect();
+
+            cardToMove.style.setProperty("translate", `${originalPosition.x - updatedPosition.x}px ${originalPosition.y - updatedPosition.y}px`);
+            cardToMove.style.setProperty("width", `${originalPosition.width}px`);
+            cardToMove.style.setProperty("top", `${updatedPosition.top}px`);
+            cardToMove.style.setProperty("position", "fixed");
+
+            cardsToSlide.forEach((card, i) => {
+                const updatedPosition = card.getBoundingClientRect();
+
+                card.style.setProperty("translate", `0 ${slidingCardsOriginalPositions[i].y - updatedPosition.y}px`);
+            })
+
+            requestAnimationFrame(() => {
+                cardToMove.style.setProperty("transition", "translate 400ms ease-in-out");
+                cardToMove.style.setProperty("translate", "0");
+
+                cardsToSlide.forEach((card) => {
+                    card.style.setProperty("transition", "translate 400ms ease-in-out");
+                    card.style.setProperty("translate", "0");
+                });
+
+                setTimeout(() => {
+                    cardToMove.style.setProperty("transition", null);
+                    cardToMove.style.setProperty("translate", null);
+                    cardToMove.style.setProperty("width", null);
+                    cardToMove.style.setProperty("top", null);
+                    cardToMove.style.setProperty("position", null);
+
+                    cardsToSlide.forEach((card) => {
+                        card.style.setProperty("transition", null);
+                        card.style.setProperty("translate", null);
+                    });
+                }, 400);
+            });
         });
     });
 }
 
+function getCardsUnder(card: HTMLElement) {
+    let currentCard = card;
+    const cards = [] as HTMLElement[];
+
+    while (currentCard.nextElementSibling) {
+        cards.push(currentCard.nextElementSibling as HTMLElement);
+        currentCard = currentCard.nextElementSibling as HTMLElement;
+    }
+
+    return cards;
+}
+
 function toCard(issue: Issue) {
     return `<li draggable="true" data-id="${issue.id}" class="surface gutter flow rounded-corners">
-        <h4 title="${issue.title}" class="ellipsis"><a href="?issueId=${issue.id}#details">${issue.title}</a></h4>
+        <h4 title="${issue.title}" class="ellipsis"><a data-link href="?issueId=${issue.id}#details">${issue.title}</a></h4>
         <div class="cluster cluster--distribute">
             <p>${issue.assignee}</p>
             <p><span title="Remaining work">${issue.remainingWork}</span> / <span title="Story points">${issue.storyPoints}</span></p>
         </div>
     </li>`
+}
+
+function toast(text: string, durationInMs = 5000) {
+    const toastElement = document.createElement("div");
+
+    toastElement.textContent = text;
+    toastElement.classList.add("toast", "toast--success", "surface", "rounded-corners");
+    toastElement.style.setProperty("--duration", `${durationInMs}ms`);
+
+    setTimeout(() => toastElement.remove(), durationInMs);
+
+    return toastElement;
 }

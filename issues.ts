@@ -1,6 +1,8 @@
 type Issue = {
     id: string;
     title: string;
+    createdBy: string;
+    createdAt: number;
     description: string;
     storyPoints: number;
     remainingWork: number;

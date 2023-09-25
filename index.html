@@ -23,8 +23,8 @@
     <nav class="surface gutter">
         <ul class="stack">
             <li><a href="create-issue.html">Create issue</a></li>
-            <li><a href="index.html#details">Details view</a></li>
-            <li><a href="index.html#sprint">Sprint board</a></li>
+            <li><a data-link href="index.html#details">Details view</a></li>
+            <li><a data-link href="index.html#sprint">Sprint board</a></li>
             <li><a href="create-user.html">Create user</a></li>
         </ul>
     </nav>
@@ -42,6 +42,10 @@
                             <label for="title">Title</label>
                             <input type="text" id="title" name="title" required />
                             <p class="error-message"></p>
+                        </div>
+                        <div class="cluster cluster--distribute">
+                            <p>Created by: <span id="created-by"></span></p>
+                            <time id="created-at"></time>
                         </div>
                         <div class="form-control">
                             <label for="status">Status</label>
@@ -97,6 +101,7 @@
                 </div>
             </div>
         </div>
+        <div id="toaster" class="stack"></div>
     </main>
 
     <script src="dist/session.js"></script>
