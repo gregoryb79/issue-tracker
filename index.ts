@@ -87,6 +87,8 @@ function showDetailsView() {
         currentIssue!.description = (e.target as HTMLFormElement).elements.description!.value;
 
         saveIssues();
+
+        document.querySelector("#toaster")!.appendChild(toast("Issue saved."));
     });
 }
 
@@ -214,4 +216,16 @@ function toCard(issue: Issue) {
             <p><span title="Remaining work">${issue.remainingWork}</span> / <span title="Story points">${issue.storyPoints}</span></p>
         </div>
     </li>`
+}
+
+function toast(text: string, durationInMs = 5000) {
+    const toastElement = document.createElement("div");
+
+    toastElement.textContent = text;
+    toastElement.classList.add("toast", "toast--success", "surface", "rounded-corners");
+    toastElement.style.setProperty("--duration", `${durationInMs}ms`);
+
+    setTimeout(() => toastElement.remove(), durationInMs);
+
+    return toastElement;
 }

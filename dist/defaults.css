@@ -7,6 +7,7 @@
   --color-surface-values: 0deg 0% 93%;
   --color-surface: hsl(var(--color-surface-values));
   --color-danger: hsl(0deg 70% 50%);
+  --color-success: hsl(133, 44%, 41%);
   --color-font-body-light: #444;
   --color-font-body-dark: #ddd;
   --color-font-body: var(--color-font-body-light);
@@ -120,4 +121,8 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+
+main {
+  position: relative;
 }

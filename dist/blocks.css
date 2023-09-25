@@ -54,3 +54,27 @@
 .form-error {
   --flow-spacing: 0.5em;
 }
+
+#toaster {
+  --gutter: 0.5rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 0.5em 1em;
+  animation: fade-out var(--duration) linear(0 50%, 1);
+}
+.toast--success {
+  background: var(--color-success);
+  background: rgba(59, 151, 78, 0.7);
+  color: var(--color-font-body-dark);
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}

@@ -68,6 +68,7 @@ function showDetailsView() {
         currentIssue.remainingWork = Number(e.target.elements.remainingWork.value);
         currentIssue.description = e.target.elements.description.value;
         saveIssues();
+        document.querySelector("#toaster").appendChild(toast("Issue saved."));
     });
 }
 function showSprintBoard() {
@@ -164,4 +165,12 @@ function toCard(issue) {
             <p><span title="Remaining work">${issue.remainingWork}</span> / <span title="Story points">${issue.storyPoints}</span></p>
         </div>
     </li>`;
+}
+function toast(text, durationInMs = 5000) {
+    const toastElement = document.createElement("div");
+    toastElement.textContent = text;
+    toastElement.classList.add("toast", "toast--success", "surface", "rounded-corners");
+    toastElement.style.setProperty("--duration", `${durationInMs}ms`);
+    setTimeout(() => toastElement.remove(), durationInMs);
+    return toastElement;
 }
