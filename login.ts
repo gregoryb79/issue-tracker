@@ -4,8 +4,9 @@ if (sessionStorage.getItem("user")) {
 }
 
 document.forms.namedItem("login")?.addEventListener("submit", (e) => {
+    
     try {
-        login(e.target.elements.username!.value, e.target.elements.pasword!.value);
+        login(e.target.elements.username!.value, e.target.elements.password!.value);//typo in password
         window.location.href = "index.html";
     } catch (error) {
         if (!(error instanceof InvalidCredentialsError)) {
