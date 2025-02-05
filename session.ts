@@ -9,9 +9,9 @@ const users = JSON.parse(
 
 const currentUser = sessionStorage.getItem("user");
 
-if (!currentUser && window.location.pathname !== "/login.html") {
-    window.location.href = "login.html";
-    throw new Error("User is not logged in.");
+if (!currentUser && !window.location.pathname.includes("login.html")) {//wrong path comparison
+   window.location.href = "login.html";
+   throw new Error("User is not logged in.");
 }
 
 document.querySelector("#username")!.textContent = currentUser;

@@ -1,7 +1,7 @@
 "use strict";
 const users = JSON.parse(localStorage.getItem("users") || "[{ \"username\": \"admin\", \"password\": \"admin\" }]");
 const currentUser = sessionStorage.getItem("user");
-if (!currentUser && window.location.pathname !== "/login.html") {
+if (!currentUser && !window.location.pathname.includes("login.html")) { //wrong path comparison
     window.location.href = "login.html";
     throw new Error("User is not logged in.");
 }
