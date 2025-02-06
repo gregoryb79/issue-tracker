@@ -7,6 +7,7 @@ document.forms.namedItem("createIssue").addEventListener("submit", (e) => {
         return;
     }
     const storyPoints = Number(e.target.elements.storyPoints.value);
+    // console.log(e.target.elements);
     createIssue({
         id: crypto.randomUUID(),
         title: e.target.elements.title.value,
