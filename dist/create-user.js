@@ -12,5 +12,5 @@ document.forms.namedItem("createUser")?.addEventListener("submit", (e) => {
         return;
     }
     createUser(username, password);
-    window.location.href += "index.html#details";
+    window.location.href = "index.html#details";
 });
